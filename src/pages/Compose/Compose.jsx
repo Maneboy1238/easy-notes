@@ -5,25 +5,41 @@ export default function Compose({ notes, setNotes }) {
   const [bodyInput, setBodyInput] = useState('')
   const [searchParams, setSearchParams] = useSearchParams()
 
+  const mode = searchParams.get('mode')
+  const id = searchParams.get('id')
   useEffect(() => {
-    const mode = searchParams.get('mode')
-    const id = searchParams.get('id')
 
     if (mode === 'edit') {
       const editedNote = notes.find(note => note.id === id);
+
+      if (!editedNote) return
+
       setHeaderInput(editedNote.head)
       setBodyInput(editedNote.body)
     }
   }, [])
   function handleSaveNote() {
-    setNotes(prev => [
-      ...prev,
-      {
-        id: crypto.randomUUID(),
-        head: headerInput,
-        body: bodyInput
-      }
-    ])
+    if (mode === 'edit') {
+      setNotes(prev => {
+        return prev.map(note => (
+          note.id === id ? {
+            ...note,
+            head: headerInput,
+            body: bodyInput
+          }
+            : note
+        ))
+      })
+    } else {
+      setNotes(prev => [
+        ...prev,
+        {
+          id: crypto.randomUUID(),
+          head: headerInput,
+          body: bodyInput
+        }
+      ])
+    }
     setHeaderInput('')
     setBodyInput('')
   }
