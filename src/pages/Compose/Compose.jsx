@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
+import { useSearchParams, useNavigate } from "react-router";
 export default function Compose({ notes, setNotes }) {
   const [headerInput, setHeaderInput] = useState('')
   const [bodyInput, setBodyInput] = useState('')
   const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate('/')
 
   const mode = searchParams.get('mode')
   const id = searchParams.get('id')
@@ -42,6 +43,7 @@ export default function Compose({ notes, setNotes }) {
     }
     setHeaderInput('')
     setBodyInput('')
+    navigate('/')
   }
   return (
     <>
