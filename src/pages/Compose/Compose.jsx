@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router";
 export default function Compose({ notes, setNotes }) {
   const [headerInput, setHeaderInput] = useState('')
   const [bodyInput, setBodyInput] = useState('')
+  const noteIdRef = useRef('')
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate('/')
 
@@ -21,6 +22,7 @@ export default function Compose({ notes, setNotes }) {
   }, [])
   function handleSaveNote() {
     if (mode === 'edit') {
+      noteIdRef.current = id
       setNotes(prev => {
         return prev.map(note => (
           note.id === id ? {
@@ -32,10 +34,12 @@ export default function Compose({ notes, setNotes }) {
         ))
       })
     } else {
+      const generateId = crypto.randomUUID()
+      noteIdRef.current = generateId
       setNotes(prev => [
         ...prev,
         {
-          id: crypto.randomUUID(),
+          id: generateId,
           head: headerInput,
           body: bodyInput
         }
@@ -43,7 +47,7 @@ export default function Compose({ notes, setNotes }) {
     }
     setHeaderInput('')
     setBodyInput('')
-    navigate('/')
+    navigate(`/note/${noteIdRef.current}`)
   }
   return (
     <>

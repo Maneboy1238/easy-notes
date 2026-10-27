@@ -32,7 +32,7 @@ function App() {
     <Routes>
       <Route index element={<Home notes={notes} setNotes={setNotes} />} />
       <Route path="/note/compose" element={<Compose notes={notes} setNotes={setNotes} />} />
-      <Route path="/note/:noteId" element={<Note notes={notes} />} />
+      <Route path="/note/:noteId" element={<Note setNotes={setNotes} notes={notes} />} />
     </Routes>
   )
 }

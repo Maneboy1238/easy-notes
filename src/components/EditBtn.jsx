@@ -7,7 +7,7 @@ export function EditBtn({ id }) {
   })
   return (
     <button>
-      <Link to={`note/compose?${searchParams}`}>
+      <Link to={`/note/compose?${searchParams}`}>
         Edit
       </Link>
     </button>

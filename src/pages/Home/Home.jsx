@@ -9,7 +9,7 @@ export default function Home({ notes, setNotes }) {
       <button onClick={() => navigate('/note/compose')}>Create Project</button>
       {
         notes.map(note => (
-          <div>
+          <div key={note.id}>
             <>
               <EditBtn id={note.id} />
               <DelBtn setNotes={setNotes} noteId={note.id} />
