@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router";
+import { ColorPicker } from "../../components/ColorPicker";
 export default function Compose({ notes, setNotes }) {
   const [headerInput, setHeaderInput] = useState('')
   const [bodyInput, setBodyInput] = useState('')
+  const [currentColor, setCurrentColor] = useState('red');
   const noteIdRef = useRef('')
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate('/')
@@ -51,21 +53,32 @@ export default function Compose({ notes, setNotes }) {
   }
   return (
     <>
-      <>
+      <ColorPicker setCurrentColor={setCurrentColor} />
+      <div style={{ background: currentColor?.background }}>
         <textarea
           rows="2"
+          style={{
+            color: currentColor?.text,
+            background: 'transparent',
+            border: 'none'
+          }}
           placeholder="Add a title"
           value={headerInput}
           onChange={(e) => setHeaderInput(e.target.value)}
         ></textarea>
         <textarea
           rows="10"
+          style={{
+            color: currentColor?.text,
+            background: 'transparent',
+            border: 'none'
+          }}
           value={bodyInput}
           placeholder="start writing"
           onChange={(e) => setBodyInput(e.target.value)}
         ></textarea>
         <button onClick={handleSaveNote}>Save</button>
-      </>
+      </div>
     </>
   )
 
