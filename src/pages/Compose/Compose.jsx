@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router";
-import { ColorPicker } from "../../components/ColorPicker";
+import { ColorPicker } from "./components/ColorPicker/ColorPicker";
+import { colors } from "./components/ColorPicker/ color";
 export default function Compose({ notes, setNotes }) {
   const [headerInput, setHeaderInput] = useState('')
   const [bodyInput, setBodyInput] = useState('')
-  const [currentColor, setCurrentColor] = useState('red');
+  const [currentColorId, setCurrentColorId] = useState('1');
   const noteIdRef = useRef('')
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate('/')
@@ -20,8 +21,10 @@ export default function Compose({ notes, setNotes }) {
 
       setHeaderInput(editedNote.head)
       setBodyInput(editedNote.body)
+      setCurrentColorId(editedNote.color.id)
     }
   }, [])
+  const currentColor = colors.find(color => color.id === currentColorId)
   function handleSaveNote() {
     if (mode === 'edit') {
       noteIdRef.current = id
@@ -30,7 +33,8 @@ export default function Compose({ notes, setNotes }) {
           note.id === id ? {
             ...note,
             head: headerInput,
-            body: bodyInput
+            body: bodyInput,
+            color: currentColor
           }
             : note
         ))
@@ -43,7 +47,8 @@ export default function Compose({ notes, setNotes }) {
         {
           id: generateId,
           head: headerInput,
-          body: bodyInput
+          body: bodyInput,
+          color: currentColor
         }
       ])
     }
@@ -53,12 +58,12 @@ export default function Compose({ notes, setNotes }) {
   }
   return (
     <>
-      <ColorPicker setCurrentColor={setCurrentColor} />
-      <div style={{ background: currentColor?.background }}>
+      <ColorPicker setCurrentColorId={setCurrentColorId} />
+      <div style={{ background: currentColor.light }}>
         <textarea
           rows="2"
           style={{
-            color: currentColor?.text,
+            color: currentColor.dark,
             background: 'transparent',
             border: 'none'
           }}
@@ -69,7 +74,7 @@ export default function Compose({ notes, setNotes }) {
         <textarea
           rows="10"
           style={{
-            color: currentColor?.text,
+            color: currentColor.dark,
             background: 'transparent',
             border: 'none'
           }}
