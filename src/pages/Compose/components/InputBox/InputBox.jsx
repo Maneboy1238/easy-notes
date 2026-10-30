@@ -38,7 +38,8 @@ export function InputBox({ currentColorId, setCurrentColorId, setNotes, notes })
             ...note,
             head: headerInput,
             body: bodyInput,
-            color: currentColor
+            color: currentColor,
+            createdAt: Date.now()
           }
             : note
         ))
@@ -52,7 +53,8 @@ export function InputBox({ currentColorId, setCurrentColorId, setNotes, notes })
           id: generateId,
           head: headerInput,
           body: bodyInput,
-          color: currentColor
+          color: currentColor,
+          createdAt: Date.now()
         }
       ])
     }

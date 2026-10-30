@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { DelBtn } from "../../components/DelBtn";
 import { EditBtn } from "../../components/EditBtn"
+import { relativeTimeFromNow } from "../../utils/date";
 export default function Note({ setNotes, notes }) {
   const { noteId } = useParams()
   const note = notes.find(note => noteId === note.id);
@@ -8,6 +9,7 @@ export default function Note({ setNotes, notes }) {
   return (
     <div style={{ background: note.color.light }}>
       <>
+        <span>{relativeTimeFromNow(note.createdAt)}</span>
         <EditBtn id={noteId} />
         <DelBtn setNotes={setNotes} noteId={noteId} />
       </>
