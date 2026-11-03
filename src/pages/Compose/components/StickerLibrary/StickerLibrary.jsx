@@ -1,3 +1,4 @@
+import { motion } from 'motion/react'
 import { stickerData } from "./stickerData";
 
 export function StickerLibrary() {
@@ -10,9 +11,9 @@ export function StickerLibrary() {
             <div>
               {
                 stickers.stickers.map(sticker => (
-                  <div>
+                  <motion.div drag>
                     <img src={sticker} width='50' />
-                  </div>
+                  </motion.div>
                 ))
               }
             </div>
