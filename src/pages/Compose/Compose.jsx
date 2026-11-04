@@ -6,17 +6,25 @@ import { StickerLibrary } from "./components/StickerLibrary/StickerLibrary";
 export default function Compose({ notes, setNotes }) {
   const [currentColorId, setCurrentColorId] = useState('1');
   const dragConstraintsRef = useRef(null);
+  const inputContainerRef = useRef(null);
 
   return (
     <>
       <ColorPicker setCurrentColorId={setCurrentColorId} />
-      <div ref={dragConstraintsRef}>
-        <StickerLibrary dragConstraintsRef={dragConstraintsRef} />
+      <div
+        ref={dragConstraintsRef}
+        style={{ background: 'teal' }}
+      >
+        <StickerLibrary
+          dragConstraintsRef={dragConstraintsRef}
+          inputContainerRef={inputContainerRef}
+        />
         <InputBox
           currentColorId={currentColorId}
           setCurrentColorId={setCurrentColorId}
           notes={notes}
           setNotes={setNotes}
+          inputContainerRef={inputContainerRef}
         />
       </div>
     </>

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react"
 import { colors } from "../ColorPicker/ color"
 import { input } from "../../../../constants/input"
 
-export function InputBox({ currentColorId, setCurrentColorId, setNotes, notes }) {
+export function InputBox({ currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef }) {
   const [headerInput, setHeaderInput] = useState('')
   const [bodyInput, setBodyInput] = useState('')
   const noteIdRef = useRef('')
@@ -75,7 +75,12 @@ export function InputBox({ currentColorId, setCurrentColorId, setNotes, notes })
 
   return (
 
-    <div style={{ background: currentColor.light }}>
+    <div
+      style={{
+        background: currentColor.light
+      }}
+      ref={inputContainerRef}
+    >
       <>
         <textarea
           rows="2"

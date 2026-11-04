@@ -1,7 +1,7 @@
-import { motion } from 'motion/react'
+import { Sticker } from "./Sticker";
 import { stickerData } from "./stickerData";
 
-export function StickerLibrary({ dragConstraintsRef }) {
+export function StickerLibrary({ dragConstraintsRef, inputContainerRef }) {
   return (
     <>
       {
@@ -11,12 +11,11 @@ export function StickerLibrary({ dragConstraintsRef }) {
             <div>
               {
                 stickers.stickers.map(sticker => (
-                  <motion.div
-                    drag
-                    dragConstraints={dragConstraintsRef}
-                  >
-                    <img src={sticker} width='50' />
-                  </motion.div>
+                  <Sticker
+                    src={sticker}
+                    dragConstraintsRef={dragConstraintsRef}
+                    inputContainerRef={inputContainerRef}
+                  />
                 ))
               }
             </div>
