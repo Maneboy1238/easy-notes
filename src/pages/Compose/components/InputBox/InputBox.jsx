@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react"
 import { colors } from "../ColorPicker/ color"
 import { input } from "../../../../constants/input"
 
-export function InputBox({ currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef }) {
+export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef }) {
   const [headerInput, setHeaderInput] = useState('')
   const [bodyInput, setBodyInput] = useState('')
   const noteIdRef = useRef('')
@@ -39,6 +39,7 @@ export function InputBox({ currentColorId, setCurrentColorId, setNotes, notes, i
             head: headerInput,
             body: bodyInput,
             color: currentColor,
+            sticker,
             createdAt: Date.now()
           }
             : note
@@ -54,6 +55,7 @@ export function InputBox({ currentColorId, setCurrentColorId, setNotes, notes, i
           head: headerInput,
           body: bodyInput,
           color: currentColor,
+          sticker,
           createdAt: Date.now()
         }
       ])

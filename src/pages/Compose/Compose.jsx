@@ -5,6 +5,7 @@ import { StickerLibrary } from "./components/StickerLibrary/StickerLibrary";
 
 export default function Compose({ notes, setNotes }) {
   const [currentColorId, setCurrentColorId] = useState('1');
+  const [sticker, setSticker] = useState(undefined);
   const dragConstraintsRef = useRef(null);
   const inputContainerRef = useRef(null);
 
@@ -18,6 +19,7 @@ export default function Compose({ notes, setNotes }) {
         <StickerLibrary
           dragConstraintsRef={dragConstraintsRef}
           inputContainerRef={inputContainerRef}
+          setSticker={setSticker}
         />
         <InputBox
           currentColorId={currentColorId}
@@ -25,6 +27,7 @@ export default function Compose({ notes, setNotes }) {
           notes={notes}
           setNotes={setNotes}
           inputContainerRef={inputContainerRef}
+          sticker={sticker}
         />
       </div>
     </>

@@ -7,7 +7,22 @@ export default function Note({ setNotes, notes }) {
   const note = notes.find(note => noteId === note.id);
 
   return (
-    <div style={{ background: note.color.light }}>
+    <div
+      style={{
+        background: note.color.light,
+        position: 'relative'
+      }}>
+      <div>
+        <img
+          src={note.sticker?.src}
+          style={{
+            position: 'absolute',
+            left: `${note.sticker?.left * 100}%`,
+            top: `${note.sticker?.top * 100}%`,
+            width: '50px'
+          }}
+        />
+      </div>
       <>
         <span>{relativeTimeFromNow(note.createdAt)}</span>
         <EditBtn id={noteId} />

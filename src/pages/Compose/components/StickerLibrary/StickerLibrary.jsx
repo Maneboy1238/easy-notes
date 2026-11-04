@@ -1,7 +1,7 @@
 import { Sticker } from "./Sticker";
 import { stickerData } from "./stickerData";
 
-export function StickerLibrary({ dragConstraintsRef, inputContainerRef }) {
+export function StickerLibrary({ dragConstraintsRef, inputContainerRef, setSticker }) {
   return (
     <>
       {
@@ -12,9 +12,11 @@ export function StickerLibrary({ dragConstraintsRef, inputContainerRef }) {
               {
                 stickers.stickers.map(sticker => (
                   <Sticker
+                    key={sticker}
                     src={sticker}
                     dragConstraintsRef={dragConstraintsRef}
                     inputContainerRef={inputContainerRef}
+                    setSticker={setSticker}
                   />
                 ))
               }
