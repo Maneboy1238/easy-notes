@@ -1,11 +1,13 @@
 import { useSearchParams, useNavigate } from "react-router"
 import { useState, useEffect, useRef } from "react"
+import { Sticker } from '../StickerLibrary/Sticker'
 import { colors } from "../ColorPicker/ color"
 import { input } from "../../../../constants/input"
 
-export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef }) {
+export function InputBox({ setSticker, sticker, currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef }) {
   const [headerInput, setHeaderInput] = useState('')
   const [bodyInput, setBodyInput] = useState('')
+  const [note, setNote] = useState(undefined)
   const noteIdRef = useRef('')
 
   const [searchParams, setSearchParams] = useSearchParams()
@@ -14,6 +16,7 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
 
   const navigate = useNavigate()
 
+  console.log(sticker)
   useEffect(() => {
 
     if (mode === 'edit') {
@@ -21,7 +24,9 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
 
       if (!editedNote) return
 
+      setNote(editedNote)
       setHeaderInput(editedNote.head)
+      setSticker(editedNote.sticker)
       setBodyInput(editedNote.body)
       setCurrentColorId(editedNote.color.id)
     }
@@ -79,10 +84,26 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
 
     <div
       style={{
-        background: currentColor.light
+        background: currentColor.light,
+        position: mode === 'edit' && 'relative',
       }}
       ref={inputContainerRef}
     >
+      {note?.sticker.length > 0 && (
+        note.sticker.map(image => (
+          <Sticker
+            key={image.id}
+            id={image.id}
+            dragConstraintsRef={inputContainerRef}
+            inputContainerRef={inputContainerRef}
+            setSticker={setSticker}
+            src={image.src}
+            data={image}
+            mode='edit'
+            stickerData={sticker}
+          />
+        ))
+      )}
       <>
         <textarea
           rows="2"

@@ -12,17 +12,20 @@ export default function Note({ setNotes, notes }) {
         background: note.color.light,
         position: 'relative'
       }}>
-      <div>
-        <img
-          src={note.sticker?.src}
-          style={{
-            position: 'absolute',
-            left: `${note.sticker?.left * 100}%`,
-            top: `${note.sticker?.top * 100}%`,
-            width: '50px'
-          }}
-        />
-      </div>
+      {note.sticker.map((sticker, i) => (
+        <div key={i}>
+          <img
+            src={sticker?.src}
+            style={{
+              position: 'absolute',
+              left: `${sticker?.left * 100}%`,
+              top: `${sticker?.top * 100}%`,
+              width: '50px'
+            }}
+          />
+        </div>
+
+      ))}
       <>
         <span>{relativeTimeFromNow(note.createdAt)}</span>
         <EditBtn id={noteId} />

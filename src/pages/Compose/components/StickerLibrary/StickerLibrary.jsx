@@ -12,8 +12,9 @@ export function StickerLibrary({ dragConstraintsRef, inputContainerRef, setStick
               {
                 stickers.stickers.map(sticker => (
                   <Sticker
-                    key={sticker}
-                    src={sticker}
+                    key={sticker.src}
+                    id={sticker.id}
+                    src={sticker.src}
                     dragConstraintsRef={dragConstraintsRef}
                     inputContainerRef={inputContainerRef}
                     setSticker={setSticker}
