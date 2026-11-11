@@ -1,4 +1,4 @@
-import { Sticker } from "./Sticker";
+import { StickerItem } from "./StickerItem";
 import { stickerData } from "./stickerData";
 
 export function StickerLibrary({ dragConstraintsRef, inputContainerRef, setSticker }) {
@@ -8,13 +8,12 @@ export function StickerLibrary({ dragConstraintsRef, inputContainerRef, setStick
         stickerData.map(stickers => (
           <div key={stickers.collection}>
             <p>{stickers.collection}</p>
-            <div>
+            <div style={{ display: 'flex' }}>
               {
                 stickers.stickers.map(sticker => (
-                  <Sticker
+                  <StickerItem
                     key={sticker.src}
-                    id={sticker.id}
-                    src={sticker.src}
+                    data={sticker}
                     dragConstraintsRef={dragConstraintsRef}
                     inputContainerRef={inputContainerRef}
                     setSticker={setSticker}

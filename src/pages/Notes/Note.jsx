@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { DelBtn } from "../../components/DelBtn";
 import { EditBtn } from "../../components/EditBtn"
 import { relativeTimeFromNow } from "../../utils/date";
+import { Sticker } from "../../components/Sticker";
 export default function Note({ setNotes, notes }) {
   const { noteId } = useParams()
   const note = notes.find(note => noteId === note.id);
@@ -12,19 +13,12 @@ export default function Note({ setNotes, notes }) {
         background: note.color.light,
         position: 'relative'
       }}>
-      {note.sticker.map((sticker, i) => (
-        <div key={i}>
-          <img
-            src={sticker?.src}
-            style={{
-              position: 'absolute',
-              left: `${sticker?.left * 100}%`,
-              top: `${sticker?.top * 100}%`,
-              width: '50px'
-            }}
-          />
-        </div>
-
+      {note.sticker.map(sticker => (
+        <Sticker
+          key={sticker.id}
+          sticker={sticker}
+          mode='note'
+        />
       ))}
       <>
         <span>{relativeTimeFromNow(note.createdAt)}</span>

@@ -1,8 +1,8 @@
 import { useSearchParams, useNavigate } from "react-router"
 import { useState, useEffect, useRef } from "react"
-import { Sticker } from '../StickerLibrary/Sticker'
 import { colors } from "../ColorPicker/ color"
 import { input } from "../../../../constants/input"
+import { InputSticker } from "./InputSticker"
 
 export function InputBox({ setSticker, sticker, currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef }) {
   const [headerInput, setHeaderInput] = useState('')
@@ -89,19 +89,15 @@ export function InputBox({ setSticker, sticker, currentColorId, setCurrentColorI
       }}
       ref={inputContainerRef}
     >
-      {note?.sticker.length > 0 && (
-        note.sticker.map(image => (
-          <Sticker
-            key={image.id}
-            id={image.id}
-            dragConstraintsRef={inputContainerRef}
-            inputContainerRef={inputContainerRef}
+      {mode === 'edit' && sticker.length > 0 && (
+        sticker.map((sticker, i) => (
+          <InputSticker
+            key={i}
             setSticker={setSticker}
-            src={image.src}
-            data={image}
-            mode='edit'
-            stickerData={sticker}
+            inputContainerRef={inputContainerRef}
+            stickerDetails={sticker}
           />
+
         ))
       )}
       <>
