@@ -4,13 +4,13 @@ import { colors } from "../ColorPicker/ color"
 import { input } from "../../../../constants/input"
 import { InputSticker } from "./InputSticker"
 
-export function InputBox({ setSticker, sticker, currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef }) {
+export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef }) {
   const [headerInput, setHeaderInput] = useState('')
   const [bodyInput, setBodyInput] = useState('')
-  const [note, setNote] = useState(undefined)
+  const [noteSticker, setNoteSticker] = useState([])
   const noteIdRef = useRef('')
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams,] = useSearchParams()
   const mode = searchParams.get('mode')
   const id = searchParams.get('id')
 
@@ -24,9 +24,8 @@ export function InputBox({ setSticker, sticker, currentColorId, setCurrentColorI
 
       if (!editedNote) return
 
-      setNote(editedNote)
+      setNoteSticker(editedNote.sticker)
       setHeaderInput(editedNote.head)
-      setSticker(editedNote.sticker)
       setBodyInput(editedNote.body)
       setCurrentColorId(editedNote.color.id)
     }
@@ -44,7 +43,10 @@ export function InputBox({ setSticker, sticker, currentColorId, setCurrentColorI
             head: headerInput,
             body: bodyInput,
             color: currentColor,
-            sticker,
+            sticker: [
+              ...sticker,
+              ...noteSticker
+            ],
             createdAt: Date.now()
           }
             : note
@@ -89,17 +91,17 @@ export function InputBox({ setSticker, sticker, currentColorId, setCurrentColorI
       }}
       ref={inputContainerRef}
     >
-      {mode === 'edit' && sticker.length > 0 && (
-        sticker.map((sticker, i) => (
+      {mode === 'edit' && noteSticker.length > 0 ? (
+        noteSticker.map((sticker, i) => (
           <InputSticker
             key={i}
-            setSticker={setSticker}
+            setNoteSticker={setNoteSticker}
             inputContainerRef={inputContainerRef}
             stickerDetails={sticker}
           />
 
         ))
-      )}
+      ) : ''}
       <>
         <textarea
           rows="2"

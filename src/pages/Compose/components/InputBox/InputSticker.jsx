@@ -4,7 +4,7 @@ import { useRef } from "react"
 
 const MotionSticker = motion.create(Sticker)
 
-export function InputSticker({ stickerDetails, setSticker, inputContainerRef }) {
+export function InputSticker({ stickerDetails, setNoteSticker, inputContainerRef }) {
   const stickerRef = useRef(null)
 
   function handleDragEnd() {
@@ -13,7 +13,7 @@ export function InputSticker({ stickerDetails, setSticker, inputContainerRef }) 
     const sticker = stickerRef.current.getBoundingClientRect();
     const top = (sticker.top - inputContainer.top) / inputContainer.height
     const left = (sticker.left - inputContainer.left) / inputContainer.width
-    setSticker(prev => {
+    setNoteSticker(prev => {
       return prev.map(sticker => {
         if (sticker.id === stickerDetails.id) {
           return {
@@ -26,16 +26,29 @@ export function InputSticker({ stickerDetails, setSticker, inputContainerRef }) 
       })
     })
   }
+
+  function handleDeleteSticker() {
+    setNoteSticker(prev => prev.filter(sticker => sticker.id !== stickerDetails.id))
+  }
+
   return (
-    <MotionSticker
-      ref={stickerRef}
-      drag
-      dragConstraints={inputContainerRef}
-      sticker={stickerDetails}
-      mode="edit"
-      onDragEnd={handleDragEnd}
-      dragMomentum={false}
-    />
+    <>
+      <button
+        onClick={handleDeleteSticker}
+        style={{
+          position: 'absolute'
+        }}
+      >Delete</button>
+      <MotionSticker
+        ref={stickerRef}
+        drag
+        dragConstraints={inputContainerRef}
+        sticker={stickerDetails}
+        mode="edit"
+        onDragEnd={handleDragEnd}
+        dragMomentum={false}
+      />
+    </>
 
   )
 }
