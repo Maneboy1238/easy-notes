@@ -27,7 +27,7 @@ export function StickerItem({ data, inputContainerRef, dragConstraintsRef, setSt
       const stickerDetails = prev.find(sticker => sticker.id === data.id);
       if (stickerDetails) {
         return prev.map(sticker => (
-          sticker.id === data.id ? (
+          sticker.stickerId === data.id ? (
             {
               ...sticker,
               top,
@@ -39,7 +39,8 @@ export function StickerItem({ data, inputContainerRef, dragConstraintsRef, setSt
         return [
           ...prev,
           {
-            id: data.id,
+            id: crypto.randomUUID(),
+            stickerId: data.id,
             src: data.src,
             left,
             top
