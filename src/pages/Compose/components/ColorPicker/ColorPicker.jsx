@@ -1,7 +1,7 @@
 import { colors } from "./ color";
 export function ColorPicker({ setCurrentColorId }) {
   return (
-    <>
+    <div style={{ display: 'flex' }}>
       {colors.map(color => (
         <div
           key={color.id}
@@ -14,6 +14,6 @@ export function ColorPicker({ setCurrentColorId }) {
           onClick={() => setCurrentColorId(color.id)}>
         </div>
       ))}
-    </>
+    </div>
   )
 }

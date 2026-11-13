@@ -1,47 +1,45 @@
 import { motion } from "motion/react"
-import { Sticker } from "../../../../components/Sticker.jsx"
 import { useRef } from "react"
+import { Sticker } from "../../../../components/Sticker.jsx"
+import { calculateStickerDimensionsRelativeToAContainer, mode } from "../../../../constants/constants.js"
 
 const MotionSticker = motion.create(Sticker)
 
-export function InputSticker({ stickerDetails, setNoteSticker, inputContainerRef }) {
+export function InputSticker({ sticker, setNoteSticker, inputContainerRef }) {
   const stickerRef = useRef(null)
 
   function handleDragEnd() {
     if (!inputContainerRef.current && !stickerRef.current) return
-    const inputContainer = inputContainerRef.current.getBoundingClientRect();
-    const sticker = stickerRef.current.getBoundingClientRect();
-    const top = (sticker.top - inputContainer.top) / inputContainer.height
-    const left = (sticker.left - inputContainer.left) / inputContainer.width
+    const { top, left } = calculateStickerDimensionsRelativeToAContainer({ sticker: stickerRef.current, container: inputContainerRef.current })
+
     setNoteSticker(prev => {
-      return prev.map(sticker => {
-        if (sticker.id === stickerDetails.id) {
+      return prev.map(stickerItem => {
+        if (stickerItem.id === sticker.id) {
           return {
-            ...sticker,
+            ...stickerItem,
             top,
             left
           }
         }
-        return sticker
+        return stickerItem
       })
     })
   }
 
   function handleDeleteSticker() {
-    setNoteSticker(prev => prev.filter(sticker => sticker.id !== stickerDetails.id))
+    setNoteSticker(prev => prev.filter(stickerItem => stickerItem.id !== sticker.id))
   }
 
   return (
     <MotionSticker
       ref={stickerRef}
+      sticker={sticker}
+      mode={mode.EDIT}
       drag
       dragConstraints={inputContainerRef}
-      sticker={stickerDetails}
-      mode="edit"
       handleDeleteSticker={handleDeleteSticker}
       onDragEnd={handleDragEnd}
       dragMomentum={false}
     />
-
   )
 }

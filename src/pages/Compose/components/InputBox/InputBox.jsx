@@ -1,8 +1,8 @@
 import { useSearchParams, useNavigate } from "react-router"
 import { useState, useEffect, useRef } from "react"
-import { colors } from "../ColorPicker/ color"
-import { input } from "../../../../constants/constants"
 import { InputSticker } from "./InputSticker"
+import { colors } from "../ColorPicker/ color"
+import { input, mode } from "../../../../constants/constants"
 
 export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef }) {
   const [headerInput, setHeaderInput] = useState('')
@@ -11,17 +11,14 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
   const noteIdRef = useRef('')
 
   const [searchParams,] = useSearchParams()
-  const mode = searchParams.get('mode')
+  const currentMode = searchParams.get('mode')
   const id = searchParams.get('id')
 
   const navigate = useNavigate()
 
-  console.log(sticker)
   useEffect(() => {
-
-    if (mode === 'edit') {
+    if (currentMode === mode.EDIT) {
       const editedNote = notes.find(note => note.id === id);
-
       if (!editedNote) return
 
       setNoteSticker(editedNote.sticker)
@@ -29,12 +26,12 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
       setBodyInput(editedNote.body)
       setCurrentColorId(editedNote.color.id)
     }
-  }, [mode, id])
+  }, [])
 
   const currentColor = colors.find(color => color.id === currentColorId)
 
   function handleSaveNote() {
-    if (mode === 'edit') {
+    if (currentMode === mode.EDIT) {
       noteIdRef.current = id
       setNotes(prev => {
         return prev.map(note => (
@@ -87,17 +84,17 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
     <div
       style={{
         background: currentColor.light,
-        position: mode === 'edit' && 'relative',
+        position: currentMode === mode.EDIT && 'relative',
       }}
       ref={inputContainerRef}
     >
-      {mode === 'edit' && noteSticker.length > 0 ? (
-        noteSticker.map((sticker, i) => (
+      {currentMode === mode.EDIT && noteSticker.length > 0 ? (
+        noteSticker.map(sticker => (
           <InputSticker
-            key={i}
+            key={sticker.id}
             setNoteSticker={setNoteSticker}
             inputContainerRef={inputContainerRef}
-            stickerDetails={sticker}
+            sticker={sticker}
           />
 
         ))
