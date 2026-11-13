@@ -1,7 +1,10 @@
 import { forwardRef } from "react"
-export const Sticker = forwardRef(({ sticker, mode }, ref) => {
+export const Sticker = forwardRef(({ sticker, mode, handleDeleteSticker }, ref) => {
   return (
     <div>
+      {mode === 'edit' && (
+        <button onClick={handleDeleteSticker}>Delete</button>
+      )}
       <img
         ref={ref}
         src={sticker?.src}

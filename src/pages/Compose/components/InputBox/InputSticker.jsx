@@ -32,23 +32,16 @@ export function InputSticker({ stickerDetails, setNoteSticker, inputContainerRef
   }
 
   return (
-    <>
-      <button
-        onClick={handleDeleteSticker}
-        style={{
-          position: 'absolute'
-        }}
-      >Delete</button>
-      <MotionSticker
-        ref={stickerRef}
-        drag
-        dragConstraints={inputContainerRef}
-        sticker={stickerDetails}
-        mode="edit"
-        onDragEnd={handleDragEnd}
-        dragMomentum={false}
-      />
-    </>
+    <MotionSticker
+      ref={stickerRef}
+      drag
+      dragConstraints={inputContainerRef}
+      sticker={stickerDetails}
+      mode="edit"
+      handleDeleteSticker={handleDeleteSticker}
+      onDragEnd={handleDragEnd}
+      dragMomentum={false}
+    />
 
   )
 }
