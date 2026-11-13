@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { StickerContext } from "../../hooks/useStickerContext";
 import { ColorPicker } from "./components/ColorPicker/ColorPicker";
 import { InputBox } from "./components/InputBox/InputBox";
 import { StickerLibrary } from "./components/StickerLibrary/StickerLibrary";
@@ -16,11 +17,11 @@ export default function Compose({ notes, setNotes }) {
         ref={dragConstraintsRef}
         style={{ background: 'teal' }}
       >
-        <StickerLibrary
-          dragConstraintsRef={dragConstraintsRef}
-          inputContainerRef={inputContainerRef}
-          setSticker={setSticker}
-        />
+
+        <StickerContext.Provider value={{ dragConstraintsRef, inputContainerRef, setSticker }}>
+          <StickerLibrary />
+        </StickerContext.Provider>
+
         <InputBox
           currentColorId={currentColorId}
           setCurrentColorId={setCurrentColorId}

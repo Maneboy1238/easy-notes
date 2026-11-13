@@ -1,22 +1,19 @@
 import { StickerItem } from "./StickerItem";
-import { stickerData } from "./stickerData";
+import { stickerCollections } from "./stickerData";
 
-export function StickerLibrary({ dragConstraintsRef, inputContainerRef, setSticker }) {
+export function StickerLibrary() {
   return (
     <>
       {
-        stickerData.map(stickers => (
-          <div key={stickers.collection}>
-            <p>{stickers.collection}</p>
+        stickerCollections.map(collection => (
+          <div key={collection.name}>
+            <p>{collection.name}</p>
             <div style={{ display: 'flex' }}>
               {
-                stickers.stickers.map(sticker => (
+                collection.stickers.map(sticker => (
                   <StickerItem
-                    key={sticker.src}
-                    data={sticker}
-                    dragConstraintsRef={dragConstraintsRef}
-                    inputContainerRef={inputContainerRef}
-                    setSticker={setSticker}
+                    key={sticker.id}
+                    sticker={sticker}
                   />
                 ))
               }

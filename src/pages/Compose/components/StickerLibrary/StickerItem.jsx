@@ -1,33 +1,37 @@
 import { useRef } from "react";
 import { motion } from "motion/react";
 import { Sticker } from "../../../../components/Sticker";
+import { useStickerContext } from "../../../../hooks/useStickerContext";
+import { mode } from "../../../../constants/constants";
 
 const MotionSticker = motion.create(Sticker);
 
-export function StickerItem({ data, inputContainerRef, dragConstraintsRef, setSticker }) {
+export function StickerItem({ sticker }) {
   const stickerRef = useRef(null);
+  const { setSticker, dragConstraintsRef, inputContainerRef: referenceRef } = useStickerContext()
 
   function handleDragEnd() {
-    if (!inputContainerRef.current && !stickerRef.current) return
-    const inputContainer = inputContainerRef.current.getBoundingClientRect();
-    const sticker = stickerRef.current.getBoundingClientRect();
+    if (!referenceRef.current && !stickerRef.current) return
 
-    const isInside = sticker.top > inputContainer.top;
+    const referenceDimensions = referenceRef.current.getBoundingClientRect();
+    const stickerDimensions = stickerRef.current.getBoundingClientRect();
+
+    const isInside = stickerDimensions.top > referenceDimensions.top;
     if (isInside) {
-      saveSticker(sticker, inputContainer)
+      saveSticker({ sticker: stickerDimensions, reference: referenceDimensions })
     } else {
       console.log('the sticker is not inside')
     }
   }
 
-  function saveSticker(sticker, inputContainer) {
-    const top = (sticker.top - inputContainer.top) / inputContainer.height
-    const left = (sticker.left - inputContainer.left) / inputContainer.width
+  function saveSticker(dimensions) {
+    const top = (dimensions.sticker.top - dimensions.reference.top) / dimensions.reference.height
+    const left = (dimensions.sticker.left - dimensions.reference.left) / dimensions.reference.width
     setSticker(prev => {
-      const stickerDetails = prev.find(sticker => sticker.id === data.id);
-      if (stickerDetails) {
-        return prev.map(sticker => (
-          sticker.stickerId === data.id ? (
+      const stickerExists = prev.find(stickerItem => stickerItem.id === sticker.id);
+      if (stickerExists) {
+        return prev.map(stickerItem => (
+          stickerItem.stickerId === sticker.id ? (
             {
               ...sticker,
               top,
@@ -40,8 +44,8 @@ export function StickerItem({ data, inputContainerRef, dragConstraintsRef, setSt
           ...prev,
           {
             id: crypto.randomUUID(),
-            stickerId: data.id,
-            src: data.src,
+            stickerId: sticker.id,
+            src: sticker.src,
             left,
             top
           }
@@ -55,8 +59,8 @@ export function StickerItem({ data, inputContainerRef, dragConstraintsRef, setSt
   return (
     <MotionSticker
       ref={stickerRef}
-      sticker={data}
-      mode='library'
+      sticker={sticker}
+      mode={mode.LIBRARY}
       drag
       dragMomentum={false}
       onDragEnd={handleDragEnd}

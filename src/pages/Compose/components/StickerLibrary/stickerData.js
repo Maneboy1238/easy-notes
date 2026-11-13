@@ -1,6 +1,6 @@
-export const stickerData = [
+export const stickerCollections = [
   {
-    collection: "Decorative",
+    name: "Decorative",
     stickers: [
       {
         id: '1',

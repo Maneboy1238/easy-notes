@@ -1,7 +1,7 @@
 import { useSearchParams, useNavigate } from "react-router"
 import { useState, useEffect, useRef } from "react"
 import { colors } from "../ColorPicker/ color"
-import { input } from "../../../../constants/input"
+import { input } from "../../../../constants/constants"
 import { InputSticker } from "./InputSticker"
 
 export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef }) {
