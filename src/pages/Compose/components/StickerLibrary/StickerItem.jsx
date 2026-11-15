@@ -23,6 +23,7 @@ export function StickerItem({ sticker }) {
     } else {
       console.log('the sticker is not inside')
     }
+
   }
 
   function saveSticker({ top, left }) {
@@ -53,7 +54,6 @@ export function StickerItem({ sticker }) {
     }
     )
   }
-
 
   return (
     <MotionSticker

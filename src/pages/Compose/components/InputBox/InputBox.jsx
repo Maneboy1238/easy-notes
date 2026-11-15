@@ -9,6 +9,8 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
   const [bodyInput, setBodyInput] = useState('')
   const [noteSticker, setNoteSticker] = useState([])
   const noteIdRef = useRef('')
+  const headerInputRef = useRef(null)
+  const bodyInputRef = useRef(null)
 
   const [searchParams,] = useSearchParams()
   const currentMode = searchParams.get('mode')
@@ -27,6 +29,7 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
       setCurrentColorId(editedNote.color.id)
     }
   }, [])
+
 
   const currentColor = colors.find(color => color.id === currentColorId)
 
@@ -101,6 +104,7 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
       ) : ''}
       <>
         <textarea
+          ref={headerInputRef}
           rows="2"
           style={{
             color: currentColor.dark,
@@ -111,6 +115,7 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
           placeholder="Add a title"
           value={headerInput}
           onChange={(e) => setHeaderInput(e.target.value)}
+          onDrop={(e) => e.preventDefault()}
         ></textarea>
         <div>
           <span>{headerInput.length}</span>
@@ -119,6 +124,7 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
       </>
       <>
         <textarea
+          ref={bodyInputRef}
           rows="10"
           style={{
             color: currentColor.dark,
@@ -129,6 +135,7 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
           value={bodyInput}
           placeholder="start writing"
           onChange={(e) => setBodyInput(e.target.value)}
+          onDrop={(e) => e.preventDefault()}
         ></textarea>
         <div>
           <span>{bodyInput.length}</span>

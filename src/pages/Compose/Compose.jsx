@@ -7,6 +7,7 @@ import { StickerLibrary } from "./components/StickerLibrary/StickerLibrary";
 export default function Compose({ notes, setNotes }) {
   const [currentColorId, setCurrentColorId] = useState('1');
   const [sticker, setSticker] = useState([]);
+  const [showStickerLibrary, setShowStickerLibrary] = useState(false)
   const dragConstraintsRef = useRef(null);
   const inputContainerRef = useRef(null);
 
@@ -17,10 +18,19 @@ export default function Compose({ notes, setNotes }) {
         ref={dragConstraintsRef}
         style={{ background: 'teal' }}
       >
+        {showStickerLibrary ? (
+          <button onClick={() => setShowStickerLibrary(false)}>Back</button>
+        ) : (
+          <button onClick={() => setShowStickerLibrary(true)}>Show Sticker</button>
+        )}
 
-        <StickerContext.Provider value={{ dragConstraintsRef, inputContainerRef, setSticker }}>
-          <StickerLibrary />
-        </StickerContext.Provider>
+        {
+          showStickerLibrary && (
+            <StickerContext.Provider value={{ dragConstraintsRef, inputContainerRef, setSticker }}>
+              <StickerLibrary />
+            </StickerContext.Provider>
+          )
+        }
 
         <InputBox
           currentColorId={currentColorId}
