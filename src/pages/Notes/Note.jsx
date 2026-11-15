@@ -9,7 +9,7 @@ export default function Note({ setNotes, notes }) {
   const note = notes.find(note => noteId === note.id);
 
   return (
-    <>
+    <div className="bg-red-500">
       <Link to="/">
         <LuArrowLeft />
       </Link>
@@ -17,7 +17,8 @@ export default function Note({ setNotes, notes }) {
         style={{
           background: note.color.light,
           position: 'relative'
-        }}>
+        }}
+      >
         {note.sticker.map(sticker => (
           <Sticker
             key={sticker.id}
@@ -33,6 +34,6 @@ export default function Note({ setNotes, notes }) {
         <h2 style={{ color: note.color.dark }}>{note.head}</h2>
         <div style={{ color: note.color.dark }}>{note.body}</div>
       </div>
-    </>
+    </div>
   )
 }
