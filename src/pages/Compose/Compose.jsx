@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { LuChevronRight, LuImagePlus } from "react-icons/lu"
 import { StickerContext } from "../../hooks/useStickerContext";
 import { ColorPicker } from "./components/ColorPicker/ColorPicker";
 import { InputBox } from "./components/InputBox/InputBox";
@@ -19,9 +20,13 @@ export default function Compose({ notes, setNotes }) {
         style={{ background: 'teal' }}
       >
         {showStickerLibrary ? (
-          <button onClick={() => setShowStickerLibrary(false)}>Back</button>
+          <button onClick={() => setShowStickerLibrary(false)}>
+            <LuChevronRight />
+          </button>
         ) : (
-          <button onClick={() => setShowStickerLibrary(true)}>Show Sticker</button>
+          <button onClick={() => setShowStickerLibrary(true)}>
+            <LuImagePlus />
+          </button>
         )}
 
         {

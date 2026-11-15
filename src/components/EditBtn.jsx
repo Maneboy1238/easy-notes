@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { LuPencil } from "react-icons/lu";
 
 export function EditBtn({ id }) {
   const searchParams = new URLSearchParams({
@@ -8,7 +9,7 @@ export function EditBtn({ id }) {
   return (
     <button>
       <Link to={`/note/compose?${searchParams}`}>
-        Edit
+        <LuPencil />
       </Link>
     </button>
   )

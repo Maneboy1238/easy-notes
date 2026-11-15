@@ -1,3 +1,4 @@
+import { LuTrash2 } from "react-icons/lu"
 import { useNavigate } from "react-router"
 
 export function DelBtn({ setNotes, noteId }) {
@@ -9,6 +10,8 @@ export function DelBtn({ setNotes, noteId }) {
     navigate('/')
   }
   return (
-    <button onClick={handleDeleteNote}>Delete</button>
+    <button onClick={handleDeleteNote}>
+      <LuTrash2 />
+    </button>
   )
 }
