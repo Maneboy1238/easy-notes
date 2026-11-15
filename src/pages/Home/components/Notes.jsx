@@ -2,6 +2,7 @@ import { useNavigate } from "react-router"
 import { EditBtn } from "../../../components/EditBtn"
 import { DelBtn } from "../../../components/DelBtn"
 import { relativeTimeFromNow } from "../../../utils/date"
+import { LuArrowRight } from "react-icons/lu"
 
 export function Notes({ notes, setNotes }) {
   const navigate = useNavigate()
@@ -28,7 +29,10 @@ export function Notes({ notes, setNotes }) {
                   background: note.color.mid
                 }}
                 onClick={() => navigate(`/note/${note.id}`)}
-              >See more</button>
+              >
+                See more{" "}
+                <LuArrowRight />
+              </button>
             </div>
           </div>
 
