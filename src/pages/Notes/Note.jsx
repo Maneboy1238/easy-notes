@@ -5,15 +5,16 @@ import { relativeTimeFromNow } from "../../utils/date";
 import { Sticker } from "../../components/Sticker";
 import { LuArrowLeft } from "react-icons/lu";
 import { Header } from "../../components/Header";
+import { mode } from "../../constants/constants"
 export default function Note({ setNotes, notes }) {
   const { noteId } = useParams()
   const note = notes.find(note => noteId === note.id);
 
   return (
-    <section className="w-full h-screen min-h-screen pb-4 flex flex-col gap-4 px-3 bg-zinc-200 dark:bg-zinc-800">
+    <section className="w-full h-screen min-h-screen flex flex-col gap-4 px-4 py-2 bg-zinc-200 dark:bg-zinc-900">
       <Header />
       <Link
-        className="w-auto"
+        className="w-max"
         to="/"
       >
         <LuArrowLeft className="dark:stroke-zinc-100 w-auto size-6" />
@@ -24,16 +25,16 @@ export default function Note({ setNotes, notes }) {
           position: 'relative',
           scrollbarWidth: "none"
         }}
-        className="w-full px-3 py-2 mx-auto overflow-y-auto h-[90%] shadow-lg dark:shadow-black/10 flex flex-col gap-4 rounded-md"
+        className="w-full px-3 py-3 mx-auto overflow-y-auto h-[80%] shadow-lg dark:shadow-black/10 flex flex-col rounded-lg"
       >
         {note.sticker.map(sticker => (
           <Sticker
             key={sticker.id}
             sticker={sticker}
-            mode='note'
+            mode={mode.NOTE}
           />
         ))}
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between items-center mb-4">
           <span
             style={{ color: note.color.dark }}
             className="text-base capitalize"
