@@ -1,7 +1,7 @@
 import { StickerItem } from "./StickerItem";
 import { stickerCollections } from "./stickerData";
 
-export function StickerLibrary() {
+export function StickerLibrary({ noteSticker }) {
   return (
     <>
       {
@@ -10,12 +10,18 @@ export function StickerLibrary() {
             <p>{collection.name}</p>
             <div style={{ display: 'flex' }}>
               {
-                collection.stickers.map(sticker => (
-                  <StickerItem
-                    key={sticker.id}
-                    sticker={sticker}
-                  />
-                ))
+                collection.stickers.map(stickerItem => {
+
+                  const stickerExists = noteSticker.find(sticker => sticker.id === stickerItem.id)
+                  return (
+                    !stickerExists && (
+                      <StickerItem
+                        key={stickerItem.id}
+                        sticker={stickerItem}
+                      />
+                    )
+                  )
+                })
               }
             </div>
           </div>

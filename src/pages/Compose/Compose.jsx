@@ -8,6 +8,7 @@ import { StickerLibrary } from "./components/StickerLibrary/StickerLibrary";
 export default function Compose({ notes, setNotes }) {
   const [currentColorId, setCurrentColorId] = useState('1');
   const [sticker, setSticker] = useState([]);
+  const [noteSticker, setNoteSticker] = useState([])
   const [showStickerLibrary, setShowStickerLibrary] = useState(false)
   const dragConstraintsRef = useRef(null);
   const inputContainerRef = useRef(null);
@@ -32,7 +33,7 @@ export default function Compose({ notes, setNotes }) {
         {
           showStickerLibrary && (
             <StickerContext.Provider value={{ dragConstraintsRef, inputContainerRef, setSticker }}>
-              <StickerLibrary />
+              <StickerLibrary noteSticker={noteSticker} />
             </StickerContext.Provider>
           )
         }
@@ -45,6 +46,8 @@ export default function Compose({ notes, setNotes }) {
           inputContainerRef={inputContainerRef}
           sticker={sticker}
           setSticker={setSticker}
+          noteSticker={noteSticker}
+          setNoteSticker={setNoteSticker}
         />
       </div>
     </>

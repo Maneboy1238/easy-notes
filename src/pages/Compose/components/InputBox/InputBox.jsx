@@ -4,10 +4,9 @@ import { InputSticker } from "./InputSticker"
 import { colors } from "../ColorPicker/ color"
 import { input, mode } from "../../../../constants/constants"
 
-export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef }) {
+export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef, noteSticker, setNoteSticker }) {
   const [headerInput, setHeaderInput] = useState('')
   const [bodyInput, setBodyInput] = useState('')
-  const [noteSticker, setNoteSticker] = useState([])
   const noteIdRef = useRef('')
   const headerInputRef = useRef(null)
   const bodyInputRef = useRef(null)

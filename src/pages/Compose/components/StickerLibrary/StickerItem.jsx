@@ -31,7 +31,7 @@ export function StickerItem({ sticker }) {
       const stickerExists = prev.find(stickerItem => stickerItem.id === sticker.id);
       if (stickerExists) {
         return prev.map(stickerItem => (
-          stickerItem.stickerId === sticker.id ? (
+          stickerItem.id === sticker.id ? (
             {
               ...stickerItem,
               top,
@@ -43,8 +43,7 @@ export function StickerItem({ sticker }) {
         return [
           ...prev,
           {
-            id: crypto.randomUUID(),
-            stickerId: sticker.id,
+            id: sticker.id,
             src: sticker.src,
             left,
             top
