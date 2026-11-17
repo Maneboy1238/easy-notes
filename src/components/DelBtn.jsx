@@ -12,8 +12,11 @@ export function DelBtn({ setNotes, noteId, color }) {
   return (
     <button onClick={handleDeleteNote}>
       <LuTrash2
-        style={{ stroke: color }}
-        className="size-4"
+        style={{
+          stroke: color?.font,
+          background: color?.background
+        }}
+        className="size-8 p-2 rounded-full"
       />
     </button>
   )

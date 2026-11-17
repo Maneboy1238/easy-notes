@@ -13,8 +13,8 @@ export const Sticker = forwardRef(({ sticker, mode, handleDeleteSticker }, ref) 
           zIndex: 100,
           left: `${sticker?.left * 100}%`,
           top: `${sticker?.top * 100}%`,
-          width: '50px'
         }}
+        className="size-16"
       />
     </div>
   )
