@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @utility page-layout {
-  @apply w-full h-screen min-h-screen flex flex-col gap-4 p-4
+  @apply w-full min-h-screen flex flex-col gap-4 p-4
 }
 
 @utility icon {
-  @apply size-8 p-2 rounded-full
+  @apply size-10 p-2 rounded-full
 }
 
 @utility note-content {
@@ -17,7 +17,7 @@
 }
 
 @utility textbox-container {
-  @apply w-full flex items-end justify-between
+  @apply w-full flex flex-col gap-1
 }
 
 @utility textbox {

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { LuChevronRight, LuImagePlus } from "react-icons/lu"
+import { LuChevronLeft, LuImagePlus } from "react-icons/lu"
 import { StickerContext } from "../../hooks/useStickerContext";
 import { ColorPicker } from "./components/ColorPicker/ColorPicker";
 import { InputBox } from "./components/InputBox/InputBox";
@@ -33,7 +33,7 @@ export default function Compose({ notes, setNotes }) {
       >
         {showStickerLibrary ? (
           <button onClick={() => setShowStickerLibrary(false)}>
-            <LuChevronRight
+            <LuChevronLeft
               style={{
                 background: currentColor.mid,
                 stroke: currentColor.dark

@@ -58,7 +58,7 @@ export default function Note({ setNotes, notes }) {
             color: note.color.dark
           }}
           className="note-header"
-        >{note.head}</h2>
+        ><pre className="whitespace-pre-wrap wrap-break-word">{note.head}</pre></h2>
         <pre
           style={{
             color: note.color.dark

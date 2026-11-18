@@ -85,7 +85,7 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
       style={{
         position: currentMode === mode.EDIT && 'relative',
       }}
-      className="flex flex-col gap-4 h-[90%] mt-0 pt-0 md:h-[70%] w-full m-auto"
+      className="flex flex-col gap-4 mt-0 pt-0 w-full m-auto"
       ref={inputContainerRef}
     >
       {currentMode === mode.EDIT && noteSticker.length > 0 ? (
@@ -102,6 +102,7 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
       <div className="textbox-container">
         <textarea
           ref={headerInputRef}
+          style={{ color: currentColor.dark }}
           className="note-header textbox"
           maxLength={input.maxHeaderLength}
           placeholder="Add a title..."
@@ -114,6 +115,7 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
             color: currentColor.dark,
             opacity: 0.5
           }}
+          className="ml-auto"
         >
           <span>{headerInput.length}</span>
           /{input.maxHeaderLength}</div>
@@ -137,6 +139,7 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
             color: currentColor.dark,
             opacity: 0.5
           }}
+          className="ml-auto"
         >
           <span>{bodyInput.length}</span>
           /{input.maxBodyLength}</div>
@@ -145,7 +148,7 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
       <button
         onClick={handleSaveNote}
         disabled={checkIfInputIsEmpty()}
-        className="ml-auto"
+        className="ml-auto disabled:opacity-50"
       >
         <LuArrowUp
           style={{
