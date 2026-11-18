@@ -11,7 +11,7 @@ export default function Note({ setNotes, notes }) {
   return (
     <section
       style={{ background: note.color.light }}
-      className="w-full h-screen min-h-screen flex flex-col gap-4 p-4">
+      className="page-layout">
       <div className="w-full flex justify-between items-center mb-4">
         <Link
           className="w-max"
@@ -19,7 +19,7 @@ export default function Note({ setNotes, notes }) {
         >
           <LuArrowLeft
             style={{ background: note.color.mid }}
-            className="dark:stroke-zinc-100 p-2 rounded-full w-auto size-8" />
+            className="icon stroke-zinc-100 w-auto" />
         </Link>
         <div className="flex gap-x-2">
           <EditBtn
@@ -44,7 +44,7 @@ export default function Note({ setNotes, notes }) {
           position: 'relative',
           scrollbarWidth: "none"
         }}
-        className="w-full flex flex-col flex-1"
+        className="note-content"
       >
         {note.sticker.map(sticker => (
           <Sticker
@@ -57,14 +57,14 @@ export default function Note({ setNotes, notes }) {
           style={{
             color: note.color.dark
           }}
-          className="text-3xl font-bold"
+          className="note-header"
         >{note.head}</h2>
-        <div
+        <pre
           style={{
             color: note.color.dark
           }}
-          className="text-lg"
-        >{note.body}</div>
+          className="text-lg whitespace-pre-wrap wrap-break-word"
+        >{note.body}</pre>
       </div>
     </section>
   )

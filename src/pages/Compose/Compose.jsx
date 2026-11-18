@@ -4,6 +4,7 @@ import { StickerContext } from "../../hooks/useStickerContext";
 import { ColorPicker } from "./components/ColorPicker/ColorPicker";
 import { InputBox } from "./components/InputBox/InputBox";
 import { StickerLibrary } from "./components/StickerLibrary/StickerLibrary";
+import { colors } from "./components/ColorPicker/ color.js";
 
 export default function Compose({ notes, setNotes }) {
   const [currentColorId, setCurrentColorId] = useState('1');
@@ -13,33 +14,58 @@ export default function Compose({ notes, setNotes }) {
   const dragConstraintsRef = useRef(null);
   const inputContainerRef = useRef(null);
 
+  const currentColor = colors.find(color => color.id === currentColorId)
+
   return (
-    <>
-      <ColorPicker setCurrentColorId={setCurrentColorId} />
+    <div
+      className="page-layout"
+      style={{
+        background: currentColor.light
+      }}
+    >
+      <ColorPicker
+        setCurrentColorId={setCurrentColorId}
+        currentColorId={currentColorId}
+      />
       <div
         ref={dragConstraintsRef}
-        style={{ background: 'teal' }}
+        className="note-content gap-4"
       >
         {showStickerLibrary ? (
           <button onClick={() => setShowStickerLibrary(false)}>
-            <LuChevronRight />
+            <LuChevronRight
+              style={{
+                background: currentColor.mid,
+                stroke: currentColor.dark
+              }}
+              className="icon"
+            />
           </button>
         ) : (
           <button onClick={() => setShowStickerLibrary(true)}>
-            <LuImagePlus />
+            <LuImagePlus
+              style={{
+                background: currentColor.mid,
+                stroke: currentColor.dark
+              }}
+              className="icon"
+            />
           </button>
         )}
 
         {
           showStickerLibrary && (
             <StickerContext.Provider value={{ dragConstraintsRef, inputContainerRef, setSticker }}>
-              <StickerLibrary noteSticker={noteSticker} />
+              <StickerLibrary
+                noteSticker={noteSticker}
+                currentColor={currentColor}
+              />
             </StickerContext.Provider>
           )
         }
 
         <InputBox
-          currentColorId={currentColorId}
+          currentColor={currentColor}
           setCurrentColorId={setCurrentColorId}
           notes={notes}
           setNotes={setNotes}
@@ -50,7 +76,7 @@ export default function Compose({ notes, setNotes }) {
           setNoteSticker={setNoteSticker}
         />
       </div>
-    </>
+    </div>
   )
 
 }

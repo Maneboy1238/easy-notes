@@ -1,16 +1,15 @@
 import { colors } from "./ color";
-export function ColorPicker({ setCurrentColorId }) {
+export function ColorPicker({ currentColorId, setCurrentColorId }) {
   return (
-    <div style={{ display: 'flex' }}>
+    <div className="flex m-auto gap-2">
       {colors.map(color => (
         <div
           key={color.id}
           style={{
             background: color.base,
-            width: '50px',
-            height: '50px',
-            borderRadius: '50%',
+            border: currentColorId === color.id && `5px solid ${color.mid}`,
           }}
+          className="shadow-md size-10 rounded-full"
           onClick={() => setCurrentColorId(color.id)}>
         </div>
       ))}

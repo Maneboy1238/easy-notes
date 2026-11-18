@@ -1,10 +1,10 @@
 import { useSearchParams, useNavigate } from "react-router"
 import { useState, useEffect, useRef } from "react"
 import { InputSticker } from "./InputSticker"
-import { colors } from "../ColorPicker/ color"
 import { input, mode } from "../../../../constants/constants"
+import { LuArrowUp } from "react-icons/lu"
 
-export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes, notes, inputContainerRef, noteSticker, setNoteSticker }) {
+export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, notes, inputContainerRef, noteSticker, setNoteSticker }) {
   const [headerInput, setHeaderInput] = useState('')
   const [bodyInput, setBodyInput] = useState('')
   const noteIdRef = useRef('')
@@ -29,8 +29,6 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
     }
   }, [])
 
-
-  const currentColor = colors.find(color => color.id === currentColorId)
 
   function handleSaveNote() {
     if (currentMode === mode.EDIT) {
@@ -85,9 +83,9 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
 
     <div
       style={{
-        background: currentColor.light,
         position: currentMode === mode.EDIT && 'relative',
       }}
+      className="flex flex-col gap-4 h-[90%] mt-0 pt-0 md:h-[70%] w-full m-auto"
       ref={inputContainerRef}
     >
       {currentMode === mode.EDIT && noteSticker.length > 0 ? (
@@ -101,50 +99,62 @@ export function InputBox({ sticker, currentColorId, setCurrentColorId, setNotes,
 
         ))
       ) : ''}
-      <>
+      <div className="textbox-container">
         <textarea
           ref={headerInputRef}
-          rows="2"
-          style={{
-            color: currentColor.dark,
-            background: 'transparent',
-            border: 'none'
-          }}
+          className="note-header textbox"
           maxLength={input.maxHeaderLength}
-          placeholder="Add a title"
+          placeholder="Add a title..."
           value={headerInput}
           onChange={(e) => setHeaderInput(e.target.value)}
           onDrop={(e) => e.preventDefault()}
         ></textarea>
-        <div>
+        <div
+          style={{
+            color: currentColor.dark,
+            opacity: 0.5
+          }}
+        >
           <span>{headerInput.length}</span>
           /{input.maxHeaderLength}</div>
 
-      </>
-      <>
+      </div>
+      <div className="textbox-container flex-1">
         <textarea
           ref={bodyInputRef}
-          rows="10"
           style={{
             color: currentColor.dark,
-            background: 'transparent',
-            border: 'none'
           }}
+          className="text-lg textbox h-full"
           maxLength={input.maxBodyLength}
           value={bodyInput}
-          placeholder="start writing"
+          placeholder="start writing..."
           onChange={(e) => setBodyInput(e.target.value)}
           onDrop={(e) => e.preventDefault()}
         ></textarea>
-        <div>
+        <div
+          style={{
+            color: currentColor.dark,
+            opacity: 0.5
+          }}
+        >
           <span>{bodyInput.length}</span>
           /{input.maxBodyLength}</div>
 
-      </>
+      </div>
       <button
         onClick={handleSaveNote}
         disabled={checkIfInputIsEmpty()}
-      >Save</button>
+        className="ml-auto"
+      >
+        <LuArrowUp
+          style={{
+            background: currentColor.mid,
+            color: currentColor.dark
+          }}
+          className="icon"
+        />
+      </button>
     </div>
   )
 }

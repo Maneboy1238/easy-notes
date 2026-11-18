@@ -1,20 +1,27 @@
 import { forwardRef } from "react"
+import { LuX } from "react-icons/lu"
 export const Sticker = forwardRef(({ sticker, mode, handleDeleteSticker }, ref) => {
   return (
-    <div>
+    <div
+      style={{
+        position: mode === 'library' ? 'relative' : 'absolute',
+        left: `${sticker?.left * 100}%`,
+        top: `${sticker?.top * 100}%`,
+      }}
+      className="size-16 z-50"
+    >
       {mode === 'edit' && (
-        <button onClick={handleDeleteSticker}>Delete</button>
+        <button
+          className="absolute"
+          onClick={handleDeleteSticker}
+        >
+          <LuX className="stroke-zinc-100 icon" />
+        </button>
       )}
       <img
         ref={ref}
         src={sticker?.src}
-        style={{
-          position: mode === 'edit' || mode === 'note' ? 'absolute' : 'relative',
-          zIndex: 100,
-          left: `${sticker?.left * 100}%`,
-          top: `${sticker?.top * 100}%`,
-        }}
-        className="size-16"
+        className="w-full h-full object-contain"
       />
     </div>
   )

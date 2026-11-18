@@ -14,7 +14,7 @@ export function EditBtn({ id, color }) {
             stroke: color?.font,
             background: color?.background
           }}
-          className="size-8 p-2 rounded-full"
+          className="icon"
         />
       </Link>
     </button>

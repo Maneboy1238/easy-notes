@@ -1,14 +1,19 @@
 import { StickerItem } from "./StickerItem";
 import { stickerCollections } from "./stickerData";
 
-export function StickerLibrary({ noteSticker }) {
+export function StickerLibrary({ noteSticker, currentColor }) {
   return (
     <>
       {
         stickerCollections.map(collection => (
-          <div key={collection.name}>
-            <p>{collection.name}</p>
-            <div style={{ display: 'flex' }}>
+          <div
+            className="flex flex-col gap-2"
+            key={collection.name}>
+            <p
+              style={{ color: currentColor.dark }}
+              className="text-base"
+            >{collection.name}</p>
+            <div className="flex gap-4">
               {
                 collection.stickers.map(stickerItem => {
 
