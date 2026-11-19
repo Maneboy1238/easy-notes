@@ -85,7 +85,7 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
       style={{
         position: currentMode === mode.EDIT && 'relative',
       }}
-      className="flex flex-col gap-4 mt-0 pt-0 w-full m-auto"
+      className="flex flex-col gap-4 mt-0 pt-0 mb-4 w-full flex-1"
       ref={inputContainerRef}
     >
       {currentMode === mode.EDIT && noteSticker.length > 0 ? (
@@ -106,6 +106,7 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
           className="note-header textbox"
           maxLength={input.maxHeaderLength}
           placeholder="Add a title..."
+          autoFocus
           value={headerInput}
           onChange={(e) => setHeaderInput(e.target.value)}
           onDrop={(e) => e.preventDefault()}

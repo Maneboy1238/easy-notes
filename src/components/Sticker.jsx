@@ -8,7 +8,7 @@ export const Sticker = forwardRef(({ sticker, mode, handleDeleteSticker }, ref) 
         left: `${sticker?.left * 100}%`,
         top: `${sticker?.top * 100}%`,
       }}
-      className="size-16 z-40"
+      className="size-16 cursor-pointer z-40"
     >
       {mode === 'edit' && (
         <button

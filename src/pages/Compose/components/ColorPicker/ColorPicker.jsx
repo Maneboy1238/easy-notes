@@ -9,7 +9,7 @@ export function ColorPicker({ currentColorId, setCurrentColorId }) {
             background: color.base,
             border: currentColorId === color.id && `5px solid ${color.mid}`,
           }}
-          className="shadow-md size-10 rounded-full"
+          className="shadow-md cursor-pointer size-10 rounded-full"
           onClick={() => setCurrentColorId(color.id)}>
         </div>
       ))}

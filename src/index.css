@@ -5,11 +5,11 @@
 }
 
 @utility icon {
-  @apply size-10 p-2 rounded-full
+  @apply size-10 p-2 rounded-full cursor-pointer
 }
 
 @utility note-content {
-  @apply w-full flex flex-col flex-1
+  @apply w-full flex flex-col flex-1 max-w-[1200px] mx-auto
 }
 
 @utility note-header {
