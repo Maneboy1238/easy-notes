@@ -7,7 +7,7 @@ import { LuArrowUpRight } from "react-icons/lu"
 export function Notes({ notes, setNotes }) {
   const navigate = useNavigate()
   return (
-    <div className="flex w-full flex-1 items-center justify-center flex-col gap-6">
+    <div className="flex max-w-[1200px] w-full grid grid-cols-[repeat(auto-fill,minmax(15rem,1fr))] justify-items-center gap-4">
       {
         notes.map(note => (
           <div
@@ -18,10 +18,10 @@ export function Notes({ notes, setNotes }) {
                 background: note.color.light,
                 clipPath: "url('#note-card')"
               }}
-              className="flex flex-col gap-4 w-full h-full px-2 py-3 rounded-2xl shadow-md"
+              className="flex flex-col gap-4 w-full h-full px-2 py-3 rounded-2xl shadow-lg"
             >
               <div className="flex justify-between items-center w-full">
-                <span className="">{relativeTimeFromNow(note.createdAt)}</span>
+                <span className="capitalize text-base">{relativeTimeFromNow(note.createdAt)}</span>
                 <div className="flex gap-x-2">
                   <EditBtn
                     color={{ font: note.color.dark, background: note.color.mid }}
