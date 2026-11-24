@@ -7,12 +7,12 @@ import { LuArrowUpRight } from "react-icons/lu"
 export function Notes({ notes, setNotes }) {
   const navigate = useNavigate()
   return (
-    <div className="flex max-w-[1200px] w-full grid grid-cols-[repeat(auto-fill,minmax(15rem,1fr))] justify-items-center gap-4">
+    <div className="flex max-w-[1200px] w-full grid grid-cols-[repeat(auto-fill,minmax(17rem,1fr))] justify-items-center gap-4">
       {
         notes.map(note => (
           <div
             key={note.id}
-            className="relative w-60 h-56">
+            className="relative w-full h-52">
             <div
               style={{
                 background: note.color.light,
@@ -50,7 +50,7 @@ export function Notes({ notes, setNotes }) {
                   font: note.color.dark,
                   background: note.color.light
                 }}
-                className="icon" />
+                className="icon size-12" />
             </button>
           </div>
 
