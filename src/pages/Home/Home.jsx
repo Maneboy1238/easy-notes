@@ -16,11 +16,13 @@ export default function Home({ notes, setNotes }) {
         </span>
       </div>
       {notes.length === 0 && (
-        <div className="dark:text-zinc-100 flex flex-col justify-center items-center gap-3 translate-y-[50%]">
+        <div className="dark:text-zinc-100 flex flex-col justify-center items-center gap-3 translate-y-[45%]">
           <img className="w-60" src={Ghost} />
           <h2 className="font-bold text-lg">Empty workspace</h2>
           <p className="text-sm">There are no notes in view right now. <br /> Select Create note below to begin</p>
-          <button className="text-sm dark:bg-zinc-700 p-2 flex gap-1.5 rounded-md">
+          <button
+            onClick={() => navigate('/note/compose')}
+            className="text-sm cursor-pointer dark:bg-zinc-700 p-2 flex gap-1.5 rounded-md">
             Create note
             <LuPlus className="size-5" />
           </button>
