@@ -12,7 +12,7 @@ export function Notes({ notes }) {
               background: note.color.light,
             }}
             onClick={() => navigate(`/note/${note.id}`)}
-            className="flex flex-col gap-4 w-full max-w-[22rem] h-56 px-2 py-3 shadow-lg relative"
+            className="flex flex-col cursor-pointer gap-4 w-full max-w-[22rem] h-56 px-2 py-3 shadow-lg relative"
           >
             <div className="absolute -top-[5%] right-0 bg-orange-600 w-20 h-6 rotate-[30deg] shadow-md"></div>
             <div
