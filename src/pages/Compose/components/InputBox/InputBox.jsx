@@ -102,7 +102,10 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
       <div className="textbox-container">
         <textarea
           ref={headerInputRef}
-          style={{ color: currentColor.dark }}
+          style={{
+            color: currentColor.dark,
+            scrollbarWidth: 'none'
+          }}
           className="note-header textbox"
           maxLength={input.maxHeaderLength}
           placeholder="Add a title..."
@@ -118,7 +121,12 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
           }}
           className="ml-auto"
         >
-          <span>{headerInput.length}</span>
+          <span
+            style={{
+              color: headerInput.length >= input.maxHeaderLength - 10 && 'red',
+              fontWeight: headerInput.length >= input.maxHeaderLength - 10 && 'bold'
+            }}
+          >{headerInput.length}</span>
           /{input.maxHeaderLength}</div>
 
       </div>
@@ -127,6 +135,7 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
           ref={bodyInputRef}
           style={{
             color: currentColor.dark,
+            scrollbarWidth: "none"
           }}
           className="text-lg textbox h-full"
           maxLength={input.maxBodyLength}
@@ -142,7 +151,12 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
           }}
           className="ml-auto"
         >
-          <span>{bodyInput.length}</span>
+          <span
+            style={{
+              color: bodyInput.length >= input.maxBodyLength - 10 && 'red',
+              fontWeight: bodyInput.length >= input.maxBodyLength - 10 && 'bold'
+            }}
+          >{bodyInput.length}</span>
           /{input.maxBodyLength}</div>
 
       </div>
