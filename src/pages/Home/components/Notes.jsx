@@ -21,7 +21,7 @@ export function Notes({ notes }) {
                 background: note.color.mid
               }}
               className="text-sm py-1.5 w-fit px-3 rounded-2xl">{relativeTimeFromNow(note.createdAt)}</div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 special-font">
               <h2
                 style={{ color: note.color.dark }}
                 className="text-lg font-bold"

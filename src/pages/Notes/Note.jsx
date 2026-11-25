@@ -44,7 +44,7 @@ export default function Note({ setNotes, notes }) {
           position: 'relative',
           scrollbarWidth: "none"
         }}
-        className="note-content"
+        className="note-content special-font"
       >
         {note.sticker.map(sticker => (
           <Sticker

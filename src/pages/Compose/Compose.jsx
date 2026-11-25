@@ -32,7 +32,7 @@ export default function Compose({ notes, setNotes }) {
         className="note-content gap-4"
       >
         {showStickerLibrary ? (
-          <button onClick={() => setShowStickerLibrary(false)}>
+          <button className="w-fit" onClick={() => setShowStickerLibrary(false)}>
             <LuChevronLeft
               style={{
                 background: currentColor.mid,
@@ -42,7 +42,7 @@ export default function Compose({ notes, setNotes }) {
             />
           </button>
         ) : (
-          <button onClick={() => setShowStickerLibrary(true)}>
+          <button className="w-fit" onClick={() => setShowStickerLibrary(true)}>
             <LuImagePlus
               style={{
                 background: currentColor.mid,

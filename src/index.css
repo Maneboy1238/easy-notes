@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.special-font {
   font-family: "Kalam", cursive;
 }
 

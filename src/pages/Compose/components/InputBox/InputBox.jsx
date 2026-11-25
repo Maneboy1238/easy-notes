@@ -106,7 +106,7 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
             color: currentColor.dark,
             scrollbarWidth: 'none'
           }}
-          className="note-header textbox"
+          className="note-header special-font textbox"
           maxLength={input.maxHeaderLength}
           placeholder="Add a title..."
           autoFocus
@@ -137,7 +137,7 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
             color: currentColor.dark,
             scrollbarWidth: "none"
           }}
-          className="text-lg textbox h-full"
+          className="text-lg special-font textbox h-full"
           maxLength={input.maxBodyLength}
           value={bodyInput}
           placeholder="start writing..."
