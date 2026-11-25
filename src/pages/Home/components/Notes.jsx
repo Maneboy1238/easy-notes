@@ -1,59 +1,34 @@
 import { useNavigate } from "react-router"
-import { EditBtn } from "../../../components/EditBtn"
-import { DelBtn } from "../../../components/DelBtn"
 import { relativeTimeFromNow } from "../../../utils/date"
-import { LuArrowUpRight } from "react-icons/lu"
 
-export function Notes({ notes, setNotes }) {
+export function Notes({ notes }) {
   const navigate = useNavigate()
   return (
-    <div className="flex max-w-[1200px] w-full grid grid-cols-[repeat(auto-fill,minmax(17rem,1fr))] justify-items-center gap-4">
+    <div className="flex max-w-[1200px] w-full grid grid-cols-[repeat(auto-fill,minmax(17rem,1fr))] justify-items-center gap-10">
       {
         notes.map(note => (
           <div
-            key={note.id}
-            className="relative w-full h-52">
+            style={{
+              background: note.color.light,
+            }}
+            onClick={() => navigate(`/note/${note.id}`)}
+            className="flex flex-col gap-4 w-full max-w-[22rem] h-56 px-2 py-3 shadow-lg relative"
+          >
+            <div className="absolute -top-[5%] right-0 bg-orange-600 w-20 h-6 rotate-[30deg] shadow-md"></div>
             <div
               style={{
-                background: note.color.light,
-                clipPath: "url('#note-card')"
+                color: note.color.dark,
+                background: note.color.mid
               }}
-              className="flex flex-col gap-4 w-full h-full px-2 py-3 rounded-2xl shadow-lg"
-            >
-              <div className="flex justify-between items-center w-full">
-                <span className="capitalize text-base">{relativeTimeFromNow(note.createdAt)}</span>
-                <div className="flex gap-x-2">
-                  <EditBtn
-                    color={{ font: note.color.dark, background: note.color.mid }}
-                    className="icon"
-                    id={note.id} />
-                  <DelBtn
-                    color={{ font: note.color.dark, background: note.color.mid }}
-                    className="icon"
-                    setNotes={setNotes}
-                    noteId={note.id} />
-                </div>
-              </div>
-              <div>
-                <h2
-                  style={{ color: note.color.dark }}
-                  className="text-2xl font-bold line-clamp-3"
-                >{note.head}</h2>
-              </div>
+              className="text-sm py-1.5 w-fit px-3 rounded-2xl">{relativeTimeFromNow(note.createdAt)}</div>
+            <div className="flex flex-col gap-2">
+              <h2
+                style={{ color: note.color.dark }}
+                className="text-lg font-bold"
+              >{note.head}</h2>
+              <p className="text-sm line-clamp-3 ">{note.body}</p>
             </div>
-            <button
-              className="absolute right-0 bottom-0"
-              onClick={() => navigate(`/note/${note.id}`)}
-            >
-              <LuArrowUpRight
-                style={{
-                  font: note.color.dark,
-                  background: note.color.light
-                }}
-                className="icon size-12" />
-            </button>
           </div>
-
         ))
       }
     </div >
