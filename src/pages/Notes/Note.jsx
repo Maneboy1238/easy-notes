@@ -44,7 +44,7 @@ export default function Note({ setNotes, notes }) {
           position: 'relative',
           scrollbarWidth: "none"
         }}
-        className="note-content special-font"
+        className="note-content gap-5 min-h-[50vh] md:min-h-[40vh] special-font"
       >
         {note.sticker.map(sticker => (
           <Sticker
@@ -58,13 +58,16 @@ export default function Note({ setNotes, notes }) {
             color: note.color.dark
           }}
           className="note-header"
-        ><pre className="whitespace-pre-wrap wrap-break-word">{note.head}</pre></h2>
-        <pre
-          style={{
-            color: note.color.dark
-          }}
-          className="text-lg whitespace-pre-wrap wrap-break-word"
-        >{note.body}</pre>
+        ><pre className="whitespace-pre-wrap wrap-break-word">{note.head}</pre>
+        </h2>
+        <div className="text-lg">
+          <pre
+            style={{
+              color: note.color.dark
+            }}
+            className="whitespace-pre-wrap wrap-break-word"
+          >{note.body}</pre>
+        </div>
       </div>
     </section>
   )

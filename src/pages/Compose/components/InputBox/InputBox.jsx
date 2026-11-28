@@ -85,7 +85,7 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
       style={{
         position: currentMode === mode.EDIT && 'relative',
       }}
-      className="flex flex-col gap-4 mt-0 pt-0 mb-4 w-full flex-1"
+      className="flex flex-col gap-4 mt-0 pt-0 mb-2 w-full flex-1"
       ref={inputContainerRef}
     >
       {currentMode === mode.EDIT && noteSticker.length > 0 ? (
@@ -130,7 +130,7 @@ export function InputBox({ sticker, currentColor, setCurrentColorId, setNotes, n
           /{input.maxHeaderLength}</div>
 
       </div>
-      <div className="textbox-container flex-1">
+      <div className="textbox-container min-h-[50vh] md:min-h-[40vh]">
         <textarea
           ref={bodyInputRef}
           style={{
