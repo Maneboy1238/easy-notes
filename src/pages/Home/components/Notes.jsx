@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router"
 import { relativeTimeFromNow } from "../../../utils/date"
+import { randomRotation } from "../../../utils/calculate"
 
 export function Notes({ notes }) {
   const navigate = useNavigate()
@@ -10,9 +11,10 @@ export function Notes({ notes }) {
           <div
             style={{
               background: note.color.light,
+              transform: `rotateZ(${randomRotation()}deg)`
             }}
             onClick={() => navigate(`/note/${note.id}`)}
-            className="flex flex-col cursor-pointer gap-4 w-full max-w-[22rem] h-56 px-2 py-3 shadow-lg relative"
+            className="flex flex-col cursor-pointer gap-4 w-[80%] max-w-[22rem] h-56 px-2 py-3 shadow-lg relative"
           >
             <div className="absolute -top-[5%] right-0 bg-orange-600 w-20 h-6 rotate-[30deg] shadow-md"></div>
             <div
